@@ -9,7 +9,13 @@ const Home = () => {
     <div>
       <Navbar />
       <Carousel />
-      <Card />
+      <div className="m-3">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </div>
       <Footer />
     </div>
   );
