@@ -5,10 +5,13 @@ const connectDB = require("./utils/connectDB");
 const config = require("./configurations/config");
 app.use(express.json());
 const mongoose = require("mongoose");
+const router = require("./router/CreateUser");
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.use("/api", router);
 
 connectDB()
   .then(() => {
