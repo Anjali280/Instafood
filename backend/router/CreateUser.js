@@ -2,8 +2,14 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
-/*validaotor is mainly for the validation of name , email and password */
+/*
+*
+*FOR SIGN IN PURPOSE
+validaotor is mainly for the validation of name , email and password
+* 
+*/
 router.post(
   "/createUser",
   [
@@ -16,10 +22,22 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ success, errors: errors.array() });
     }
+
+    const salt = await bcrypt.genSalt(10);
+    let securePassword = await bcrypt.hash(req.body.password, salt);
     try {
-      const user = req.body;
-      await User.create(user);
-      res.json({ success: true });
+      // const user = req.body;
+      await User.create({
+        name: req.body.name,
+        password: securePassword,
+        email: req.body.email,
+        location: req.body.location,
+      })
+        .then(res.json({ success: true }))
+        .catch((err) => {
+          console.log(err);
+          res.json({ error: "Please enter a unique value." });
+        });
     } catch (err) {
       console.log(err);
       res.json({ success: false });
@@ -27,7 +45,7 @@ router.post(
   }
 );
 
-//For LOGIN
+/*For LOGIN PURPOSE*/
 router.post(
   "/loginuser",
   [
