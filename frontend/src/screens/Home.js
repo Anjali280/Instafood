@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
-import Carousel from "../components/Carousel";
 
 const Home = () => {
   const [foodCat, setFoodCat] = useState([]);
   const [foodItems, setFoodItems] = useState([]);
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
   const loadFoodItems = async () => {
     let url = await fetch("http://localhost:4000/api/displayfooddata");
@@ -24,7 +23,85 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <Carousel />
+      <div>
+        <div
+          id="carouselExampleFade"
+          className="carousel slide carousel-fade"
+          data-bs-ride="carousel"
+          style={{ objectFit: "cover !important" }}
+        >
+          <div className="carousel-inner" id="carousel">
+            <div className="carousel-caption" style={{ zIndex: "10" }}>
+              <div className="d-flex justify-content-center">
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
+                <button
+                  className="btn btn-outline-success text-white bg-success"
+                  type="submit"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+            <div className="carousel-item active">
+              <img
+                src="https://source.unsplash.com/random/700x500/?burger"
+                className="d-block w-100"
+                alt="..."
+                style={{ filter: "brightness(30%" }}
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src="https://source.unsplash.com/random/900x700/?pastry"
+                className="d-block w-100"
+                alt="..."
+                style={{ filter: "brightness(30%" }}
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src="https://source.unsplash.com/random/900x700/?fries"
+                className="d-block w-100"
+                alt="..."
+                style={{ filter: "brightness(30%" }}
+              />
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
       <div className="container">
         {foodCat !== []
           ? foodCat.map((data) => {
@@ -37,11 +114,11 @@ const Home = () => {
                   {foodItems !== [] ? (
                     foodItems
                       .filter(
-                        (items) => items.CategoryName === data.CategoryName
-                        //  &&
-                        // items.name
-                        //   .toLowerCase()
-                        //   .includes(search.toLowerCase())
+                        (items) =>
+                          items.CategoryName === data.CategoryName &&
+                          items.name
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
                       )
                       .map((element) => {
                         return (
