@@ -9,7 +9,7 @@ const config = require("../configurations/config");
 /*
 *
 *FOR SIGN IN PURPOSE
-validaotor is mainly for the validation of name , email and password
+validaotor is mainly for the validation of name , email and password by express validator
 * 
 */
 router.post(
@@ -27,6 +27,7 @@ router.post(
 
     const salt = await bcrypt.genSalt(10);
     let securePassword = await bcrypt.hash(req.body.password, salt);
+
     try {
       await User.create({
         name: req.body.name,
@@ -37,7 +38,7 @@ router.post(
         .then(res.json({ success: true }))
         .catch((err) => {
           console.log(err);
-          res.json({ error: "Please enter a unique value." });
+          res.json({ error: "Error while creating a USER" });
         });
     } catch (err) {
       console.log(err);
@@ -96,4 +97,9 @@ router.post(
   }
 );
 
+/*
+*
+For 
+*
+*/
 module.exports = router;

@@ -7,7 +7,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/api/loginuser", {
+    const url = await fetch("http://localhost:4000/api/loginuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,12 +17,12 @@ export default function Login() {
         password: credentials.password,
       }),
     });
-    const json = await response.json();
-    console.log(json);
-    if (json.success) {
+    const response = await url.json();
+    console.log(response);
+    if (response.success) {
       //save the auth toke to local storage and redirect
       // localStorage.setItem("userEmail", credentials.email);
-      localStorage.setItem("token", json.authToken);
+      localStorage.setItem("token", response.authToken);
       navigate("/");
     } else {
       alert("Enter Valid Credentials");

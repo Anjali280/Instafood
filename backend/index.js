@@ -4,7 +4,8 @@ const app = express();
 const connectDB = require("./utils/connectDB");
 const config = require("./configurations/config");
 app.use(express.json());
-const router = require("./router/CreateUser");
+const CreateUserrouter = require("./router/CreateUser");
+const DisplayDatarouter = require("./router/DisplayData");
 const cors = require("cors");
 app.use(cors());
 
@@ -12,7 +13,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/api", router);
+app.use("/api", CreateUserrouter);
+app.use("/api", DisplayDatarouter);
 
 connectDB()
   .then(() => {
@@ -23,7 +25,8 @@ connectDB()
     //   if (err) {
     //     console.log(err);
     //   } else {
-    //     console.log(data);
+    //     global.food_items = data;
+    //     // console.log(data);
     //   }
     // });
 
