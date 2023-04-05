@@ -61,6 +61,7 @@ const Signup = () => {
               Name
             </label>
             <input
+              placeholder="Enter the Username "
               type="text"
               className="form-control"
               name="name"
@@ -74,6 +75,7 @@ const Signup = () => {
               Email address
             </label>
             <input
+              placeholder="Enter the email "
               type="email"
               className="form-control"
               id="exampleInputEmail1"
@@ -82,16 +84,14 @@ const Signup = () => {
               value={credentials.email}
               onChange={onChange}
             />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
-            </div>
           </div>
 
-          <div className="m-3">
+          <div className="m-4">
             <label for="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
+              placeholder="Enter the password "
               type="password"
               className="form-control"
               id="exampleInputPassword1"
@@ -106,6 +106,7 @@ const Signup = () => {
               Add Address
             </label>
             <input
+              placeholder="Enter the Address "
               type="text"
               className="form-control"
               id="exampleInputPassword1"

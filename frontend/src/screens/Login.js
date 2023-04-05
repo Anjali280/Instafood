@@ -56,21 +56,20 @@ export default function Login() {
             </label>
             <input
               type="email"
+              placeholder="Enter the email "
               className="form-control"
               name="email"
               value={credentials.email}
               onChange={onChange}
               aria-describedby="emailHelp"
             />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone.
-            </div>
           </div>
           <div className="m-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
+              placeholder="Enter the password "
               type="password"
               className="form-control"
               value={credentials.password}

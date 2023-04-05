@@ -126,11 +126,15 @@ const Home = () => {
                             key={element.id}
                             className="col-12 col-md-6 col-lg-3"
                           >
-                            <Card
+                            {/* <Card
                               foodName={element.name}
                               item={element}
                               options={element.options[0]}
                               ImgSrc={element.img}
+                            /> */}
+                            <Card
+                              foodItem={element}
+                              options={element.options[0]}
                             />
                           </div>
                         );
