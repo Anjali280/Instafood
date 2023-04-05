@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -23,21 +29,55 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link " aria-current="page" to="/">
+                <Link
+                  className="nav-link active fs-5"
+                  aria-current="page"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link className="nav-link" to="/createuser">
-                  Sign Up
-                </Link>
-              </li>
+
+              {localStorage.getItem("token") ? (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link fs-5 mx-3 active"
+                    aria-current="page"
+                    to="/myorder"
+                  >
+                    My Orders
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
             </ul>
+            <div>
+              {!localStorage.getItem("token") ? (
+                <form className="d-flex">
+                  <Link className="btn bg-white text-success mx-1 " to="/login">
+                    Login
+                  </Link>
+                  <Link
+                    className="btn bg-white text-success mx-1"
+                    to="/createuser"
+                  >
+                    Signup
+                  </Link>
+                </form>
+              ) : (
+                <div>
+                  <div className="btn bg-white text-success mx-2 ">My Cart</div>
+
+                  <button
+                    className="btn bg-white text-danger"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </nav>
