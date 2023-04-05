@@ -4,6 +4,7 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const config = require("../configurations/config");
 
 /*
 *
@@ -78,16 +79,16 @@ router.post(
           .status(400)
           .json({ success, error: "Try Logging in with correct credentials" });
       }
-      return res.json({ success: true });
 
-      // const data = {
-      //   user: {
-      //     id: user.id,
-      //   },
-      // };
-      // success = true;
-      // const authToken = jwt.sign(data, jwtSecret);
-      // res.json({ success, authToken });
+      /*Generation of JWT Token*/
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      success = true;
+      const authToken = jwt.sign(data, config.JWT_SECRET_KEY);
+      return res.json({ success: true, authToken });
     } catch (error) {
       console.error(error.message);
       res.send("Server Error");
