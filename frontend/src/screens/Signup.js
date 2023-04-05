@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Signup = () => {
   const [credentials, setCredentials] = useState({
@@ -12,7 +13,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/api/createuser", {
+    const response = await fetch("http://localhost:3000/api/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,10 +40,23 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <div
+      style={{
+        backgroundImage:
+          'url("https://images.pexels.com/photos/326278/pexels-photo-326278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+        height: "100vh",
+        backgroundSize: "cover",
+      }}
+    >
+      <div>
+        <Navbar />
+      </div>
       <div className="container">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+        <form
+          className="w-50 m-auto mt-5 border bg-dark border-success rounded"
+          onSubmit={handleSubmit}
+        >
+          <div className="m-4">
             <label for="name" className="form-label">
               Name
             </label>
@@ -55,7 +69,7 @@ const Signup = () => {
             />
           </div>
 
-          <div className="mb-3">
+          <div className="m-4">
             <label for="exampleInputEmail1" className="form-label">
               Email address
             </label>
@@ -73,7 +87,7 @@ const Signup = () => {
             </div>
           </div>
 
-          <div className="mb-3">
+          <div className="m-3">
             <label for="exampleInputPassword1" className="form-label">
               Password
             </label>
@@ -87,7 +101,7 @@ const Signup = () => {
             />
           </div>
 
-          <div className="mb-3">
+          <div className="m-4">
             <label for="exampleInputPassword1" className="form-label">
               Add Address
             </label>
@@ -101,15 +115,15 @@ const Signup = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className=" m-4 btn btn-success">
             Submit
           </button>
-          <Link to="/login" className="m-3 btn btn-danger">
+          <Link to="/login" className="m-4 btn btn-danger">
             Already a User
           </Link>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
