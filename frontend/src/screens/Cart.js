@@ -43,7 +43,7 @@ export default function Cart() {
     <div>
       {console.log(data)}
       <div className="container m-auto mt-5 table-responsive  table-responsive-sm table-responsive-md">
-        <table className="table table-hover ">
+        <table className="table">
           <thead className=" text-success fs-4">
             <tr>
               <th scope="col">#</th>
@@ -63,7 +63,11 @@ export default function Cart() {
                 <td>{food.size}</td>
                 <td>{food.price}</td>
                 <td>
-                  <button type="button text-danger" className="btn p-0">
+                  <button
+                    type="button danger"
+                    className="btn p-0 text-danger"
+                    // style={{ color: "red" }}
+                  >
                     <DeleteSharpIcon
                       onClick={() => {
                         dispatch({ type: "REMOVE", index: index });
