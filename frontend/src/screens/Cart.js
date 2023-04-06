@@ -1,5 +1,4 @@
 import React from "react";
-// import Delete from "@mui/icons-material/Delete";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import { useCart, useDispatchCart } from "../components/ContextReducer";
 

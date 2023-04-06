@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
-//import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Cart from "../screens/Cart";
 import Modal from "../Modals";
 import { useCart } from "./ContextReducer";
@@ -50,7 +49,7 @@ const Navbar = () => {
                   <Link
                     className="nav-link fs-5 mx-3 active"
                     aria-current="page"
-                    to="/myorder"
+                    to="/myOrder"
                   >
                     My Orders
                   </Link>
