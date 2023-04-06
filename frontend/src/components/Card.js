@@ -12,6 +12,15 @@ const Card = (props) => {
   let data = useCart();
 
   const handleAddToCart = async () => {
+    let food = [];
+    for (const item of data) {
+      if (item.id === props.foodItem._id) {
+        food = item;
+
+        break;
+      }
+    }
+
     await dispatch({
       type: "ADD",
       id: props.foodItem._id,
