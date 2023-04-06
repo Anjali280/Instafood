@@ -77,7 +77,7 @@ const Card = (props) => {
 
           <div className="container w-100">
             <select
-              className="m-2 h-100  bg-success rounded"
+              className="m-2 h-100  bg-success rounded text-white"
               onChange={(e) => {
                 setQty(e.target.value);
               }}
@@ -91,7 +91,7 @@ const Card = (props) => {
               })}
             </select>
             <select
-              className="m-2 h-100  bg-success rounded"
+              className="m-2 h-100  bg-success rounded text-white"
               onChange={(e) => {
                 setSize(e.target.value);
               }}

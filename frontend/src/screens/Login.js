@@ -21,7 +21,7 @@ export default function Login() {
     console.log(response);
     if (response.success) {
       //save the auth toke to local storage and redirect
-      // localStorage.setItem("userEmail", credentials.email);
+      localStorage.setItem("userEmail", credentials.email);
       localStorage.setItem("token", response.authToken);
       navigate("/");
     } else {

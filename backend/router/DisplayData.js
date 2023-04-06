@@ -13,7 +13,6 @@ async function main() {
   const collection1 = db.collection("food_items");
   const collection2 = db.collection("foodCategory");
 
-  // the following code examples can be pasted here...
   const findFood_item = await collection1.find({}).toArray();
   const findfoodCategory = await collection2.find({}).toArray();
   const findResult = { findFood_item, findfoodCategory };
@@ -24,11 +23,9 @@ router.get("/displayfooddata", async (req, res) => {
   try {
     await main()
       .then((data) => {
-        // console.log(data);
         res.send({ payload: data });
       })
       .catch(console.error);
-    //.finally(() => client.close());
   } catch (err) {
     console.error(err.message);
     res.send("Server Error");
