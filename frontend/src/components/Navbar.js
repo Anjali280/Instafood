@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Badge from "@mui/icons-material/Badge";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
-import { IconButton } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Cart from "../screens/Cart";
+import Modal from "../Modals";
+
 const Navbar = () => {
+  const [cartView, setCartView] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -70,18 +72,26 @@ const Navbar = () => {
                 </form>
               ) : (
                 <div>
-                  {/* <div className="btn bg-white text-success mx-2 ">My Cart</div> */}
-                  {/* <div className="btn bg-white text-success mx-2 ">
-                    <Badge color="secondary" badgeContent={10}>
+                  <div
+                    className="btn bg-white text-success mx-2 "
+                    // onClick={loadCart}
+                    onClick={() => {
+                      setCartView(true);
+                    }}
+                  >
+                    <Badge color="secondary" badgeContent={5}>
                       <ShoppingCartIcon />
                     </Badge>
                     Cart
-                  </div> */}
-                  <IconButton aria-label="cart">
-                    <Badge badgeContent={4} color="secondary">
-                      <ShoppingCartSharpIcon />
-                    </Badge>
-                  </IconButton>
+                  </div>
+
+                  {cartView ? (
+                    <Modal onClose={() => setCartView(false)}>
+                      <Cart />
+                    </Modal>
+                  ) : (
+                    ""
+                  )}
 
                   <button
                     className="btn bg-white text-danger"
