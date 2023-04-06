@@ -6,6 +6,8 @@ const config = require("./configurations/config");
 app.use(express.json());
 const CreateUserrouter = require("./router/CreateUser");
 const DisplayDatarouter = require("./router/DisplayData");
+const OrderDatarouter = require("./router/OrderData");
+
 const cors = require("cors");
 app.use(cors());
 
@@ -15,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", CreateUserrouter);
 app.use("/api", DisplayDatarouter);
+app.use("/api", OrderDatarouter);
 
 connectDB()
   .then(() => {
