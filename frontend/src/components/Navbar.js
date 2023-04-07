@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Badge from "react-bootstrap/Badge";
+//import Badge from "react-bootstrap/Badge";
 import Cart from "../screens/Cart";
 import Modal from "../Modals";
 import { useCart } from "./ContextReducer";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
 
 const Navbar = () => {
   const [cartView, setCartView] = useState(false);
@@ -75,18 +77,18 @@ const Navbar = () => {
                 <div>
                   <div
                     className="btn bg-white text-success mx-2 "
-                    // onClick={loadCart}
                     onClick={() => {
                       setCartView(true);
                     }}
                   >
-                    {/* <Badge color="secondary" badgeContent={items.length}>
+                    <Badge color="secondary" badgeContent={items.length}>
                       <ShoppingCartIcon />
-                    </Badge> */}
-                    Cart
+                    </Badge>
+
+                    {/* <ShoppingCartIcon />
                     <Badge pill bg="danger">
                       {items.length}
-                    </Badge>
+                    </Badge> */}
                   </div>
 
                   {cartView ? (
@@ -98,7 +100,7 @@ const Navbar = () => {
                   )}
 
                   <button
-                    className="btn bg-white text-danger"
+                    className="btn text-white bg-danger"
                     onClick={handleLogout}
                   >
                     Logout

@@ -38,7 +38,7 @@ const Card = (props) => {
           price: finalPrice,
           qty: qty,
           size: size,
-          img: props.ImgSrc,
+          img: props.foodItem.img,
         });
         console.log("Size different so simply ADD one more to the list");
         return;
