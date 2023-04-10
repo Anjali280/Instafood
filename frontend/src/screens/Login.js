@@ -7,7 +7,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = await fetch("http://localhost:4000/api/loginuser", {
+    const url = await fetch("http://65.0.95.193:4000/api/loginuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
