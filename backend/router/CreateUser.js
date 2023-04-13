@@ -29,13 +29,14 @@ router.post(
     let securePassword = await bcrypt.hash(req.body.password, salt);
 
     try {
-      await User.create({
+      let userDetails = await User.create({
         name: req.body.name,
         password: securePassword,
+        avatar: req.body.avatar,
         email: req.body.email,
         location: req.body.location,
       })
-        .then(res.json({ success: true }))
+        .then(res.json({ success: true, payload: userDetails }))
         .catch((err) => {
           console.log(err);
           res.json({ error: "Error while creating a USER" });

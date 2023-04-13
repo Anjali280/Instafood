@@ -6,6 +6,7 @@ const Signup = () => {
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
+    avatar: "",
     password: "",
     geolocation: "",
   });
@@ -13,18 +14,22 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://65.0.95.193:4000/api/createuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: credentials.name,
-        email: credentials.email,
-        password: credentials.password,
-        location: credentials.geolocation,
-      }),
-    });
+    const response = await fetch(
+      "https://instafood-backend.onrender.com/api/createuser",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: credentials.name,
+          email: credentials.email,
+          avatar: credentials.avatar,
+          password: credentials.password,
+          location: credentials.geolocation,
+        }),
+      }
+    );
     const json = await response.json();
     console.log(json);
 
@@ -52,10 +57,7 @@ const Signup = () => {
         <Navbar />
       </div>
       <div className="container">
-        <form
-          className="w-50 m-auto mt-5 border bg-dark border-success rounded"
-          onSubmit={handleSubmit}
-        >
+        <form className="w-50 m-auto mt-5 border bg-dark border-success rounded">
           <div className="m-4">
             <label for="name" className="form-label">
               Name
@@ -82,6 +84,22 @@ const Signup = () => {
               aria-describedby="emailHelp"
               name="email"
               value={credentials.email}
+              onChange={onChange}
+            />
+          </div>
+
+          <div className="m-4">
+            <label for="exampleInputavatar" className="form-label">
+              Avatar
+            </label>
+            <input
+              placeholder="Enter the Avatar "
+              type="url"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              name="avatar"
+              value={credentials.avatar}
               onChange={onChange}
             />
           </div>
@@ -116,7 +134,11 @@ const Signup = () => {
             />
           </div>
 
-          <button type="submit" className=" m-4 btn btn-success">
+          <button
+            type="submit"
+            className=" m-4 btn btn-success"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
           <Link to="/login" className="m-4 btn btn-danger">

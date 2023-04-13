@@ -7,16 +7,19 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = await fetch("http://65.0.95.193:4000/api/loginuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
+    const url = await fetch(
+      "https://instafood-backend.onrender.com/api/loginuser",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      }
+    );
     const response = await url.json();
     console.log(response);
     if (response.success) {
@@ -46,10 +49,7 @@ export default function Login() {
         <Navbar />
       </div>
       <div className="container">
-        <form
-          className="w-50 m-auto mt-5 border bg-dark border-success rounded"
-          onSubmit={handleSubmit}
-        >
+        <form className="w-50 m-auto mt-5 border bg-dark border-success rounded">
           <div className="m-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
@@ -77,7 +77,11 @@ export default function Login() {
               name="password"
             />
           </div>
-          <button type="submit" className="m-3 btn btn-success">
+          <button
+            type="submit"
+            className="m-3 btn btn-success"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
           <Link to="/createuser" className="m-3 mx-1 btn btn-danger">

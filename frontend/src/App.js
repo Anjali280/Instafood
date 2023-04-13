@@ -1,4 +1,3 @@
-import "./App.css";
 import Home from "./screens/Home";
 import { Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
@@ -8,6 +7,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import Signup from "./screens/Signup";
 import { CartProvider } from "./components/ContextReducer";
 import MyOrder from "./screens/MyOrder";
+import Profile from "./screens/Profile";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/createuser" element={<Signup />} />
           <Route path="/myOrder" element={<MyOrder />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </CartProvider>
     </div>

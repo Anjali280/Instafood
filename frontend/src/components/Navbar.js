@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import Badge from "react-bootstrap/Badge";
 import Cart from "../screens/Cart";
 import Modal from "../Modals";
 import { useCart } from "./ContextReducer";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
+import * as React from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import Avatar from "@mui/material/Avatar";
 
 const Navbar = () => {
   const [cartView, setCartView] = useState(false);
@@ -13,6 +17,10 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const handleAccount = () => {
+    navigate("/profile");
   };
 
   const items = useCart();
@@ -75,36 +83,59 @@ const Navbar = () => {
                 </form>
               ) : (
                 <div>
-                  <div
-                    className="btn bg-white text-success mx-2 "
-                    onClick={() => {
-                      setCartView(true);
-                    }}
-                  >
-                    <Badge color="secondary" badgeContent={items.length}>
-                      <ShoppingCartIcon />
-                    </Badge>
+                  <div style={{ display: "flex" }}>
+                    <div
+                      className="btn bg-white text-success mx-2 "
+                      onClick={() => {
+                        setCartView(true);
+                      }}
+                    >
+                      <Badge color="secondary" badgeContent={items.length}>
+                        <ShoppingCartIcon />
+                      </Badge>
+                    </div>
 
-                    {/* <ShoppingCartIcon />
-                    <Badge pill bg="danger">
-                      {items.length}
-                    </Badge> */}
-                  </div>
+                    {cartView ? (
+                      <Modal onClose={() => setCartView(false)}>
+                        <Cart />
+                      </Modal>
+                    ) : (
+                      ""
+                    )}
 
-                  {cartView ? (
-                    <Modal onClose={() => setCartView(false)}>
-                      <Cart />
-                    </Modal>
-                  ) : (
-                    ""
-                  )}
-
-                  <button
+                    {/* <button
                     className="btn text-white bg-danger"
                     onClick={handleLogout}
                   >
                     Logout
-                  </button>
+                  </button> */}
+
+                    <PopupState variant="popover" popupId="demo-popup-menu">
+                      {(popupState) => (
+                        <React.Fragment>
+                          <Avatar
+                            variant="contained"
+                            {...bindTrigger(popupState)}
+                            alt="Remy Sharp"
+                            src="/static/images/avatar/1.jpg"
+                          />
+                          <Menu {...bindMenu(popupState)}>
+                            <MenuItem onClick={handleAccount}>
+                              My account
+                            </MenuItem>
+                            <MenuItem
+                              onClick={() => {
+                                navigate("/myOrder");
+                              }}
+                            >
+                              My Orders
+                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                          </Menu>
+                        </React.Fragment>
+                      )}
+                    </PopupState>
+                  </div>
                 </div>
               )}
             </div>
