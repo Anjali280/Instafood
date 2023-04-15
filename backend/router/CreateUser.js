@@ -127,7 +127,7 @@ router.get("/getDetails", Auth, async (req, res) => {
 For Change Password
 *
 */
-router.post("/changePassword", Auth, async (req, res) => {
+router.patch("/changePassword", Auth, async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body;
     const { _id } = req.user;

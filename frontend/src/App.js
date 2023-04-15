@@ -8,6 +8,7 @@ import Signup from "./screens/Signup";
 import { CartProvider } from "./components/ContextReducer";
 import MyOrder from "./screens/MyOrder";
 import Profile from "./screens/Profile";
+import ChangePassword from "./screens/ChangePassword";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/createuser" element={<Signup />} />
           <Route path="/myOrder" element={<MyOrder />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/password" element={<ChangePassword />} />
         </Routes>
       </CartProvider>
     </div>

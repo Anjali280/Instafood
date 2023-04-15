@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
 
   const fetchUser = async (event) => {
@@ -73,6 +73,9 @@ const Profile = () => {
                   type="button"
                   class="btn btn-rounded btn-lg"
                   style={{ backgroundColor: "#198754", color: "white" }}
+                  onClick={() => {
+                    navigate("/password");
+                  }}
                 >
                   CHANGE PASSWORD
                 </button>
