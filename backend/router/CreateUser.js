@@ -121,4 +121,41 @@ router.get("/getDetails", Auth, async (req, res) => {
     });
   }
 });
+
+/*
+*
+For Change Password
+*
+*/
+router.post("/changePassword", Auth, async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    const { _id } = req.user;
+    const user = await User.findById(_id);
+
+    if (!bcrypt.compareSync(oldPassword, user.password)) {
+      return res.status(400).send({
+        type: "faliure",
+        message: "wrong old password",
+      });
+    }
+
+    const inputPassword = newPassword;
+    const hashedPassword = bcrypt.hashSync(inputPassword);
+
+    await User.findByIdAndUpdate(_id, { $set: { password: hashedPassword } });
+
+    res.status(201).send({
+      type: "success",
+      message: "Password changed successfully",
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).send({
+      error: "Something went wrong",
+    });
+  }
+});
+
 module.exports = router;
