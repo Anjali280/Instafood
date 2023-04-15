@@ -8,12 +8,15 @@ const Profile = () => {
 
   const fetchUser = async (event) => {
     const token = JSON.parse(localStorage.getItem("token"));
-    const url = await fetch("http://localhost:4000/api/getDetails", {
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const url = await fetch(
+      "https://instafood-85uo.onrender.com/api/getDetails",
+      {
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const res = await url.json();
     setUser(res.payload);

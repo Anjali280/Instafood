@@ -7,16 +7,19 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = await fetch("http://localhost:4000/api/loginuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
+    const url = await fetch(
+      "https://instafood-85uo.onrender.com/api/loginuser",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      }
+    );
     const response = await url.json();
     console.log(response);
     if (response.success) {

@@ -9,7 +9,9 @@ const Home = () => {
   const [search, setSearch] = useState("");
 
   const loadFoodItems = async () => {
-    let url = await fetch("http://localhost:4000/api/displayfooddata");
+    let url = await fetch(
+      "https://instafood-85uo.onrender.com/api/displayfooddata"
+    );
     const response = await url.json();
     //console.log(response.payload.findFood_item);
     setFoodItems(response.payload.findFood_item);

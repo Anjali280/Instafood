@@ -66,17 +66,20 @@ const ChangePassword = () => {
     }
     const token = JSON.parse(localStorage.getItem("token"));
     event.preventDefault();
-    const url = await fetch("http://localhost:4000/api/changePassword", {
-      method: "PATCH",
-      body: JSON.stringify({
-        oldPassword: OldPassword,
-        newPassword: NewPassword,
-      }),
-      headers: {
-        "Content-type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const url = await fetch(
+      "https://instafood-85uo.onrender.com/api/changePassword",
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          oldPassword: OldPassword,
+          newPassword: NewPassword,
+        }),
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const res = await url.json();
     console.log(res);

@@ -7,7 +7,7 @@ export default function MyOrder() {
 
   const fetchMyOrder = async () => {
     console.log(localStorage.getItem("userEmail"));
-    await fetch("http://localhost:4000/api/myOrderData", {
+    await fetch("https://instafood-85uo.onrender.com/api/myOrderData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
