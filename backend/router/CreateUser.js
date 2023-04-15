@@ -29,14 +29,14 @@ router.post(
     let securePassword = await bcrypt.hash(req.body.password, salt);
 
     try {
-      let userDetails = await User.create({
+      await User.create({
         name: req.body.name,
         password: securePassword,
         avatar: req.body.avatar,
         email: req.body.email,
         location: req.body.location,
       })
-        .then(res.json({ success: true, payload: userDetails }))
+        .then(res.json({ success: true }))
         .catch((err) => {
           console.log(err);
           res.json({ error: "Error while creating a USER" });
@@ -83,13 +83,14 @@ router.post(
       }
 
       /*Generation of JWT Token*/
-      const data = {
-        user: {
-          id: user.id,
-        },
-      };
+      // const data = {
+      //   user: {
+      //     id: user.id,
+      //   },
+      // };
+      const { _id } = user;
       success = true;
-      const authToken = jwt.sign(data, config.JWT_SECRET_KEY);
+      const authToken = jwt.sign({ _id }, config.JWT_SECRET_KEY);
       return res.json({ success: true, authToken });
     } catch (error) {
       console.error(error.message);
@@ -100,7 +101,16 @@ router.post(
 
 /*
 *
-For 
+For getting account details
 *
 */
+router.get("/getDetails", async (req, res) => {
+  try {
+    let eId = await Order.findOne({ email: req.body.email });
+
+    res.json({ success: true });
+  } catch (error) {
+    res.send("Error", error.message);
+  }
+});
 module.exports = router;

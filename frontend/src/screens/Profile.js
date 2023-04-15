@@ -23,8 +23,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
 
-  const fetchUser = async () => {
-    //event.preventDefault();
+  const fetchUser = async (event) => {
+    event.preventDefault();
     const token = JSON.parse(localStorage.getItem("token"));
     const url = await fetch("http://localhost:4000/api/auth/loggedInUser", {
       headers: {
