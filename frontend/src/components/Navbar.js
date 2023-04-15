@@ -23,6 +23,27 @@ const Navbar = () => {
     navigate("/profile");
   };
 
+  const [user, setUser] = useState({});
+
+  const fetchUser = async (event) => {
+    // event.preventDefault();
+    const token = JSON.parse(localStorage.getItem("token"));
+    const url = await fetch("http://localhost:4000/api/getDetails", {
+      headers: {
+        "Content-type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    const res = await url.json();
+    setUser(res.payload);
+    console.log(res.payload);
+  };
+
+  React.useEffect(() => {
+    fetchUser();
+  }, []);
+
   const items = useCart();
   return (
     <div>
@@ -103,21 +124,14 @@ const Navbar = () => {
                       ""
                     )}
 
-                    {/* <button
-                    className="btn text-white bg-danger"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button> */}
-
                     <PopupState variant="popover" popupId="demo-popup-menu">
                       {(popupState) => (
                         <React.Fragment>
                           <Avatar
                             variant="contained"
                             {...bindTrigger(popupState)}
-                            alt="Remy Sharp"
-                            src="/static/images/avatar/1.jpg"
+                            alt={user.name}
+                            src={user.avatar}
                           />
                           <Menu {...bindMenu(popupState)}>
                             <MenuItem onClick={handleAccount}>

@@ -5,6 +5,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../configurations/config");
+const Auth = require("../middleware/Auth");
 
 /*
 *
@@ -104,13 +105,20 @@ router.post(
 For getting account details
 *
 */
-router.get("/getDetails", async (req, res) => {
+router.get("/getDetails", Auth, async (req, res) => {
   try {
-    let eId = await Order.findOne({ email: req.body.email });
+    const { _id } = req.user;
+    const { name, location, email, avatar } = await User.findById(_id);
 
-    res.json({ success: true });
-  } catch (error) {
-    res.send("Error", error.message);
+    res.send({
+      type: "success",
+      message: "fetch logged in user info success",
+      payload: { name, location, email, avatar },
+    });
+  } catch (err) {
+    res.status(500).send({
+      error: "Something went wrong",
+    });
   }
 });
 module.exports = router;
